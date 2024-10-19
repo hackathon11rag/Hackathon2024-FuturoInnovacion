@@ -1,2 +1,8 @@
-# Hackathon2024-FuturoInnovacion
-Hackathon2024-FuturoInnovacion
+# Hackathon: Construyendo el futuro
+
+
+Jorge
+Osvaldo
+Hugo
+Lorenzo
+
