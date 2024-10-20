@@ -5,12 +5,11 @@ import uuid  # Importa el módulo UUID
 # Define constantes
 CHROMA_SERVER_URL = 'http://localhost:8000'  # Ajusta si tu servidor corre en un host/puerto diferente
 AUTH_TOKEN = 'test-token'  # Usa tu token real si es diferente
-#DATASET_FILE = 'dataset.json'  # El archivo que contiene tus datos de embeddings
-#COLLECTION_NAME = "vulnerabilities"  # Nombre de la colección fija
+DATASET_FILE = 'dataset.json'  # El archivo que contiene tus datos de embeddings
+COLLECTION_NAME = "hackcollection"  # Nombre de la colección fija
 
-
-DATASET_FILE = 'demo.json'  # El archivo que contiene tus datos de embeddings
-COLLECTION_NAME = "demo2"  # Nombre de la colección fija
+#DATASET_FILE = 'demo.json'  # El archivo que contiene tus datos de embeddings
+#COLLECTION_NAME = "demo2"  # Nombre de la colección fija
 
 def load_embeddings_data():
     """Cargar embeddings desde un archivo JSON."""
@@ -131,45 +130,7 @@ def add_embeddings(collection_id, embeddings_data):
     return response
 
 
-def add_specific_embeddings(collection_name):
-    """Agregar embeddings específicos a una colección en ChromaDB y probar la respuesta."""
-    # Definir datos de prueba
-    embeddings = [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6]]  # Ejemplo de embeddings
-    metadata = [{"description": "Embeddings para vulnerabilidad 1"}, {"description": "Embeddings para vulnerabilidad 2"}]  # Metadata de prueba
-    documents = ["Document 1 sobre vulnerabilidad", "Document 2 sobre vulnerabilidad"]  # Documentos de prueba
-    
-    # Primero, verificar si la colección existe
-    if not collection_exists(collection_name):
-        print(f"Collection '{collection_name}' does not exist. Creating it now.")
-        collection_id, create_response = create_collection(collection_name)
-        if not collection_id:
-            print(f"Failed to create collection: {create_response.status_code}, Response: {create_response.json()}")
-            return
-    else:
-        # Obtener el ID de la colección existente
-        collection_id = next((c['id'] for c in list_collections() if c['name'] == collection_name), None)
 
-    # Enviar la solicitud para agregar embeddings
-    url = f"{CHROMA_SERVER_URL}/api/v1/collections/{collection_id}/add"
-    headers = {
-        "Authorization": f"Bearer {AUTH_TOKEN}",
-        "Content-Type": "application/json"
-    }
-    
-    payload = {
-        "embeddings": embeddings,
-        "metadatas": metadata,
-        "documents": documents,
-        "ids": [str(uuid.uuid4()) for _ in range(len(embeddings))]  # Generar IDs únicos para cada embedding
-    }
-
-    response = requests.post(url, headers=headers, json=payload)
-    
-    # Imprimir la respuesta del servidor para verificar si se cargaron los datos correctamente
-    if response.status_code == 201:
-        print("Embeddings added successfully.")
-    else:
-        print(f"Failed to add embeddings: {response.status_code}, Response: {response.json()}")
 
 
 def main():
@@ -184,7 +145,7 @@ def main():
         collection_id = next((c['id'] for c in list_collections() if c['name'] == COLLECTION_NAME), None)
     else:
         # Crear la colección
-        collection_id, create_response = create_collection(COLLECTION_NAME)
+        collection_id, create_response = create_collection( COLLECTION_NAME)
         if collection_id:
             print(f"Collection {COLLECTION_NAME} created successfully with ID: {collection_id}.")
         else:
@@ -198,8 +159,7 @@ def main():
         print("Embeddings added successfully.")
     else:
         print(f"Failed to add embeddings: {response.status_code}, Response: {response.json()}")
-    
-    add_specific_embeddings( "demo" )
+
 
 if __name__ == "__main__":
     main()
