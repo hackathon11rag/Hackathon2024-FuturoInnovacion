@@ -56,16 +56,40 @@
             margin: 0;
         }
 
-        .cover-image {
-            background-image: url('https://via.placeholder.com/1200x400'); /* Placeholder cover image */
-            background-size: cover;
-            background-position: center;
-            height: 400px; /* Adjust height as needed */
+        .cover-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
             margin-bottom: 40px; /* Space below cover image */
             position: relative;
             z-index: 1;
+        }
+
+        .cover-image {
+            background-size: cover;
+            background-position: center;
+            height: 400px; /* Adjust height as needed */
+            width: 100%; /* Full width for the cover image */
             border-radius: 10px; /* Rounded corners */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            position: relative;
+        }
+
+        .image-placeholder {
+            width: 200px; /* Width of each image placeholder */
+            height: 150px; /* Height of each image placeholder */
+            background-color: #bdc3c7; /* Light gray background for placeholders */
+            margin: 10px; /* Space around each placeholder */
+            border-radius: 10px; /* Rounded corners for placeholders */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em; /* Font size for placeholder text */
+            color: #fff; /* Text color for placeholder text */
+            text-align: center;
+            position: relative;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
         }
 
         section {
@@ -118,7 +142,12 @@
     <h1>Hackathon - Proyecto</h1>
 </header>
 
-<div class="cover-image"></div> <!-- Cover image space -->
+<div class="cover-container">
+    <div class="image-placeholder">Imagen 1</div>
+    <div class="image-placeholder">Imagen 2</div>
+    <div class="image-placeholder">Imagen 3</div>
+    <div class="image-placeholder">Imagen 4</div>
+</div>
 
 <section id="problem">
     <h2>Descripción del Problema</h2>
@@ -266,24 +295,19 @@
         "retina_detect": true
     });
 
-    // Function to show sections on scroll
-    const sections = document.querySelectorAll("section");
-    const options = {
-        threshold: 0.1 // Trigger when 10% of the section is in view
-    };
-
+    // Fade in sections on scroll
+    const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
+                entry.target.classList.add('visible');
             }
         });
-    }, options);
+    });
 
     sections.forEach(section => {
         observer.observe(section);
     });
 </script>
-
 </body>
 </html>
