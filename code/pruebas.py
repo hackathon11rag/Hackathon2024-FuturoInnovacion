@@ -1,11 +1,14 @@
-from langchain_huggingface import HuggingFacePipeline, HuggingFaceEmbeddings
-from langchain_core.prompts import PromptTemplate
-from langchain_community.vectorstores import FAISS
-from datasets import load_dataset
-# from langchain.docstore.document import Document
-from langchain_core.runnables.passthrough import RunnablePassthrough
-import pprint
-
-dataset = load_dataset("/home/jfr317/.llama/checkpoints/Llama3.2-1B", split='train')
-                       
-pprint.pprint(dataset[0])
+import os
+import chromadb
+from chromadb.config import Settings
+from dotenv import load_dotenv
+load_dotenv('.chroma_env')
+client = chromadb.HttpClient(
+    host="localhost",
+    port=8000,
+    settings=Settings(
+        chroma_client_auth_provider="chromadb.auth.token_authn.TokenAuthClientProvider",
+        chroma_client_auth_credentials=os.getenv("CHROMA_CLIENT_AUTH_CREDENTIALS")
+    )
+)
+chroma_client.heartbeat()

@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-import datasets import load_dataset
+from datasets import load_dataset
 from langchain.docstore.document import Document
 from langchain_text_splitters import CharacterTextSplitter
 
@@ -32,6 +32,8 @@ output = query(texts)
 
 embeddings = pd.DataFrame(output)
 
-# print(embeddings)
+print(embeddings)
 
-dataset = load_dataset("/home/jfr317/.llama/checkpoints/Llama3.2-1B", split='train')
+## dataset = load_dataset("/home/jfr317/.llama/checkpoints/Llama3.2-1B", split='train')
+
+general_prompt1 = """Eres un asistente especializado en tecnología y ciberseguridad. Dada una pregunta sobre alguno de esos temas, la responderás de la manera más simple posible, para que incluso gente que no tiene bagaje sobre esos tópicos pueda entenderte. También tu respuesta estará deberá considerar que el usuario no tiene acceso a una gran cantidad de dinero"""
