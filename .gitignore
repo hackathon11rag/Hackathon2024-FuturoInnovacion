@@ -1,6 +1,8 @@
 # Ignore virtual environment
 venv/
-code/venv/
+code-win/venv/
+code-linux/venv2/
+code-linux/venv/
 
 
 # Optional: If there are any specific Python-related files or directories you'd like to exclude, you can also add them:

@@ -5,11 +5,9 @@ import uuid  # Importa el módulo UUID
 # Define constantes
 CHROMA_SERVER_URL = 'http://localhost:8000'  # Ajusta si tu servidor corre en un host/puerto diferente
 AUTH_TOKEN = 'test-token'  # Usa tu token real si es diferente
-DATASET_FILE = 'dataset.json'  # El archivo que contiene tus datos de embeddings
+DATASET_FILE = 'chromadb_export_1000.json'  # El archivo que contiene tus datos de embeddings
 COLLECTION_NAME = "hackcollection"  # Nombre de la colección fija
-
-#DATASET_FILE = 'demo.json'  # El archivo que contiene tus datos de embeddings
-#COLLECTION_NAME = "demo2"  # Nombre de la colección fija
+DATABASE_NAME = "hack"  # Nombre de la base de datos
 
 def load_embeddings_data():
     """Cargar embeddings desde un archivo JSON."""
@@ -42,10 +40,9 @@ def ensure_unique_embeddings(data):
             embeddings_set.add(embedding_tuple)
     return data
 
-
 def list_collections():
     """Listar todas las colecciones existentes."""
-    url = f"{CHROMA_SERVER_URL}/api/v1/collections"
+    url = f"{CHROMA_SERVER_URL}/api/v1/collections?database={DATABASE_NAME}"
     headers = {
         "Authorization": f"Bearer {AUTH_TOKEN}"
     }
@@ -57,7 +54,7 @@ def list_collections():
 
 def delete_collection(collection_name):
     """Eliminar una colección específica."""
-    url = f"{CHROMA_SERVER_URL}/api/v1/collections/{collection_name}"
+    url = f"{CHROMA_SERVER_URL}/api/v1/collections/{collection_name}?database={DATABASE_NAME}"
     headers = {
         "Authorization": f"Bearer {AUTH_TOKEN}"
     }
@@ -82,7 +79,6 @@ def delete_all_collections():
         else:
             print(f"Failed to delete collection '{collection_name}': {response.status_code}, Response: {response.json()}")
 
-
 def collection_exists(collection_name):
     """Verificar si una colección existe."""
     collections = list_collections()
@@ -94,14 +90,22 @@ def collection_exists(collection_name):
 
 def create_collection(collection_name):
     """Crear una nueva colección y devolver su ID."""
-    url = f"{CHROMA_SERVER_URL}/api/v1/collections"
+    url = f"{CHROMA_SERVER_URL}/api/v1/collections?database={DATABASE_NAME}"
     headers = {
         "Authorization": f"Bearer {AUTH_TOKEN}",
         "Content-Type": "application/json"
     }
     
+    # Asegúrate de incluir algún metadata predeterminado
+    metadata = {
+        "description": "Collection for hack-related data"  # Proporciona un metadata predeterminado
+    }
+    
     payload = {
-        "name": collection_name  # Proporcionar el nombre de la colección
+        "name": collection_name,
+        "configuration": {},  # Añadir configuración si es necesario
+        "metadata": metadata,  # Ahora incluye un metadata predeterminado
+        "get_or_create": False
     }
     
     response = requests.post(url, headers=headers, json=payload)
@@ -110,9 +114,10 @@ def create_collection(collection_name):
     else:
         return None, response  # Retornar None y la respuesta si hay un error
 
+
 def add_embeddings(collection_id, embeddings_data):
     """Enviar solicitud POST para agregar embeddings a la colección."""
-    url = f"{CHROMA_SERVER_URL}/api/v1/collections/{collection_id}/add"
+    url = f"{CHROMA_SERVER_URL}/api/v1/collections/{collection_id}/add?database={DATABASE_NAME}"  # Añadir database al URL
     headers = {
         "Authorization": f"Bearer {AUTH_TOKEN}",
         "Content-Type": "application/json"
@@ -129,12 +134,9 @@ def add_embeddings(collection_id, embeddings_data):
     response = requests.post(url, headers=headers, json=payload)
     return response
 
-
-
-
-
 def main():
     # Cargar y limpiar datos de embeddings
+    delete_all_collections()
     embeddings_data = load_embeddings_data()
     embeddings_data = clean_embeddings_data(embeddings_data)
     embeddings_data = ensure_unique_embeddings(embeddings_data)
@@ -145,7 +147,7 @@ def main():
         collection_id = next((c['id'] for c in list_collections() if c['name'] == COLLECTION_NAME), None)
     else:
         # Crear la colección
-        collection_id, create_response = create_collection( COLLECTION_NAME)
+        collection_id, create_response = create_collection(COLLECTION_NAME)
         if collection_id:
             print(f"Collection {COLLECTION_NAME} created successfully with ID: {collection_id}.")
         else:
@@ -159,7 +161,6 @@ def main():
         print("Embeddings added successfully.")
     else:
         print(f"Failed to add embeddings: {response.status_code}, Response: {response.json()}")
-
 
 if __name__ == "__main__":
     main()
