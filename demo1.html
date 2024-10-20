@@ -3,181 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciberseguridad para ONGs</title>
+    <title>Hackathon - Proyecto</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"> <!-- Google Fonts link -->
     <style>
+        :root {
+            --color-text: #2c3e50;
+            --color-background: rgba(236, 240, 241, 0.8); /* Semi-transparent background for sections */
+            --color-header: rgba(44, 62, 80, 0.95);
+            --color-header-text: #ffffff;
+            --color-nav: #3498db;
+            --color-nav-hover: #2980b9;
+            --color-section-bg: rgba(255, 255, 255, 0.8); /* Semi-transparent sections */
+            --color-footer: rgba(44, 62, 80, 0.95);
+            --color-footer-text: #ffffff;
+            --color-button-bg: #27ae60;
+            --color-button-hover: #2ecc71;
+            --color-border-focus: #3498db;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif; /* Updated font family */
             margin: 0;
             padding: 0;
-            color: #333333;
+            color: var(--color-text);
             overflow-x: hidden;
             position: relative;
             height: 100vh;
+            background-color: var(--color-background);
         }
+
         #particles-js {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: 0; /* Particles in the background */
         }
+
         header {
-            background: rgba(0, 51, 102, 0.9);
-            
+            background: var(--color-header);
             padding: 20px;
             text-align: center;
-            color: #ffffff;
+            color: var(--color-header-text);
             position: relative;
             z-index: 1;
         }
+
         h1 {
             font-size: 2.5em;
             margin: 0;
         }
-        nav {
-            margin: 20px 0;
+
+        .cover-image {
+            background-image: url('https://via.placeholder.com/1200x400'); /* Placeholder cover image */
+            background-size: cover;
+            background-position: center;
+            height: 400px; /* Adjust height as needed */
+            margin-bottom: 40px; /* Space below cover image */
+            position: relative;
+            z-index: 1;
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow effect */
         }
-        nav a {
-            margin: 0 15px;
-            color: #66ccff;
-            text-decoration: none;
-            font-size: 1.2em;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #ffffff;
-        }
+
         section {
-            padding: 20px;
-            margin: 20px;
+            padding: 40px 20px;
+            margin: 20px auto 20px 20px;
             border-radius: 10px;
-            background: rgba(240, 240, 240, 0.6);
+            background: var(--color-section-bg);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* Start invisible */
+            transform: translateY(20px); /* Start slightly below */
+            transition: opacity 0.5s ease, transform 0.5s ease;
             position: relative;
             z-index: 1;
         }
+
+        section.visible {
+            opacity: 1; /* Fade in */
+            transform: translateY(0); /* Move to original position */
+        }
+
         footer {
-            background: rgba(0, 51, 102, 0.9);
+            background: var(--color-footer);
             padding: 10px;
             text-align: center;
-            color: #ffffff;
+            color: var(--color-footer-text);
             position: relative;
             z-index: 1;
         }
-        .services {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-        .service {
-    background: rgba(102, 204, 255, 0.75); /* Color azul con 75% de opacidad */
-    padding: 20px;
-    border-radius: 10px;
-    width: 30%;
-    margin: 10px;
-    transition: transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 
-        .service:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        .video-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--color-nav);
+            text-decoration: none;
+            transition: color 0.3s;
         }
-        .gallery {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .gallery img {
-            width: 30%;
-            margin: 1%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.1);
-        }
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .form-container input, .form-container textarea {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #cccccc;
-            transition: border-color 0.3s;
-        }
-        .form-container input:focus, .form-container textarea:focus {
-            border-color: #66ccff; /* Color del borde al enfocar */
-        }
-        .form-container button {
-            padding: 10px 20px;
-            background: #003366;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-        }
-        .form-container button:hover {
-            background: #66ccff;
-            transform: translateY(-2px); /* Efecto de elevación al pasar el ratón */
+
+        .video-link:hover {
+            color: var(--color-nav-hover);
         }
     </style>
 </head>
 <body>
 
-<div id="particles-js"></div>
+<div id="particles-js"></div> <!-- Particles background -->
 
 <header>
-    <h1>Ciberseguridad para ONGs</h1>
+    <h1>Hackathon - Proyecto</h1>
 </header>
 
-<section id="services">
-    <h2>Nuestros Servicios</h2>
-    <div class="services">
-        <div class="service">
-            <h3>Auditorías de Seguridad</h3>
-            <p>Realizamos auditorías completas para identificar vulnerabilidades en tu sistema y proteger tus datos.</p>
-        </div>
-        <div class="service">
-            <h3>Pruebas de Penetración</h3>
-            <p>Simulamos ataques para fortalecer tu defensa y garantizar la seguridad de la información sensible.</p>
-        </div>
-        <div class="service">
-            <h3>Capacitación</h3>
-            <p>Entrenamos a tu equipo en las mejores prácticas de ciberseguridad para crear una cultura de seguridad.</p>
-        </div>
-    </div>
+<div class="cover-image"></div> <!-- Cover image space -->
+
+<section id="problem">
+    <h2>Descripción del Problema</h2>
+    <p>Aquí puedes describir el problema que intentas resolver con tu proyecto.</p>
 </section>
 
-<section id="gallery">
-    <h2>Galería de Proyectos</h2>
-    <div class="gallery">
-        <img src="https://via.placeholder.com/300" alt="Proyecto 1">
-        <img src="https://via.placeholder.com/300" alt="Proyecto 2">
-        <img src="https://via.placeholder.com/300" alt="Proyecto 3">
-    </div>
+<section id="solution">
+    <h2>Descripción de la Solución</h2>
+    <p>En esta sección, detalla la solución propuesta y cómo aborda el problema descrito anteriormente.</p>
 </section>
 
-<section id="contact">
-    <h2>Contacto</h2>
-    <div class="form-container">
-        <input type="text" placeholder="Tu Nombre" required>
-        <input type="email" placeholder="Tu Email" required>
-        <textarea placeholder="Tu Mensaje" required></textarea>
-        <button type="submit">Enviar</button>
-    </div>
+<section id="technical-details">
+    <h2>Detalles Técnicos</h2>
+    <p>Proporciona información técnica sobre la implementación de tu solución, incluyendo tecnologías utilizadas y arquitectura del sistema.</p>
+</section>
+
+<section id="results">
+    <h2>Resultados y Evaluación</h2>
+    <p>Describe los resultados obtenidos, la efectividad de la solución y cualquier evaluación realizada.</p>
+</section>
+
+<section id="future-work">
+    <h2>Trabajo Futuro</h2>
+    <p>Habla sobre posibles mejoras, funcionalidades futuras o cómo se podría expandir el proyecto.</p>
+</section>
+
+<section id="video">
+    <h2>Enlace de Video</h2>
+    <a class="video-link" href="https://www.youtube.com/watch?v=your_video_link" target="_blank">Ver Video del Proyecto</a>
 </section>
 
 <footer>
-    <p>© 2024 Ciberseguridad para ONGs. Todos los derechos reservados.</p>
+    <p>© 2024 Hackathon. Todos los derechos reservados.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -192,7 +166,7 @@
                 }
             },
             "color": {
-                "value": "#66ccff"
+                "value": "#3498db"  // Color de partículas
             },
             "shape": {
                 "type": "circle",
@@ -232,7 +206,7 @@
             "line_linked": {
                 "enable": true,
                 "distance": 150,
-                "color": "#66ccff",
+                "color": "#3498db", // Color de línea de partículas
                 "opacity": 0.4,
                 "width": 1
             },
@@ -243,7 +217,6 @@
                 "random": false,
                 "straight": false,
                 "out_mode": "out",
-                "bounce": false,
                 "attract": {
                     "enable": false,
                     "rotateX": 600,
@@ -291,6 +264,24 @@
             }
         },
         "retina_detect": true
+    });
+
+    // Function to show sections on scroll
+    const sections = document.querySelectorAll("section");
+    const options = {
+        threshold: 0.1 // Trigger when 10% of the section is in view
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
     });
 </script>
 
