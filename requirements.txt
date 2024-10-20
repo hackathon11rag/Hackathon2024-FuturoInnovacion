@@ -326,10 +326,8 @@ scikit-learn==1.5.2
 SciPy==1.11.3
 scour==0.38.2
 SecretStorage==3.3.3
-selinux @ file:///builddir/build/BUILD/libselinux-3.7/src
 Send2Trash==1.8.2
 sentence-transformers==3.2.0
-sepolicy @ file:///builddir/build/BUILD/selinux-3.7/python/sepolicy
 setools==4.5.1
 setuptools==69.0.3
 shtab==1.6.1
