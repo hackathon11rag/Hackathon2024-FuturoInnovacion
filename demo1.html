@@ -143,20 +143,45 @@
 </header>
 
 <div class="cover-container">
-    <div class="image-placeholder">Imagen 1</div>
-    <div class="image-placeholder">Imagen 2</div>
-    <div class="image-placeholder">Imagen 3</div>
-    <div class="image-placeholder">Imagen 4</div>
+    <img src="hack_011.png" alt="Descripción del problema" width="150" style="margin-top: 40px; margin-right: 60px;">
+    <img src="hack_012.png" alt="Descripción de la solución" width="150" style="margin-top: 40px; margin-right: 60px;">
+    <img src="hack_013.png" alt="Detalles Técnicos" width="150" style="margin-top: 40px; margin-right: 60px;">
+    <img src="hack_014.png" alt="Trabajo Futuro" width="150" style="margin-top: 40px;">
 </div>
 
 <section id="problem">
     <h2>Descripción del Problema</h2>
-    <p>Aquí puedes describir el problema que intentas resolver con tu proyecto.</p>
+    <p>En México, muchas asociaciones y fundaciones de apoyo social dependen de recursos humanos que, a menudo, no cuentan con el conocimiento especializado en tecnología.<br> Esta falta de experticia las hace vulnerables a ciberataques que pueden comprometer sus activos informáticos, como correos electrónicos, cuentas de usuario y bases de datos, entre otros, resultando en posibles pérdidas financieras, interrupciones operativas y daños a su reputación.<br> Además, el uso ineficiente de sus recursos tecnológicos les impide maximizar su impacto social.<br> El reto es desarrollar una solución que les permita optimizar sus recursos y mejorar su seguridad, facilitando una operación más eficiente y segura.</p>
 </section>
 
 <section id="solution">
     <h2>Descripción de la Solución</h2>
-    <p>En esta sección, detalla la solución propuesta y cómo aborda el problema descrito anteriormente.</p>
+    <p>Nuestro proyecto utiliza el modelo de lenguaje Llama 3.2 para desarrollar un chatbot que, a través de un conjunto de datos (dataset) altamente personalizado, ofrece recomendaciones de seguridad tecnológica.<br> Este conjunto de datos  está diseñado para que las organizaciones sin fines de lucro puedan consultar fácilmente soluciones sobre vulnerabilidades y recibir sugerencias de mitigación específicas, adaptadas a sus necesidades particulares.<br>
+
+    <b>Recopilación y calidad de datos</b>:<br>
+        Creamos un conjunto de datos  exhaustivo que recopila información sobre vulnerabilidades  y mejores prácticas de seguridad. Este contenido será cuidadosamente normalizado para garantizar su relevancia, enfocado en amenazas específicas a organizaciones con poca o nula experiencia técnica.<br>
+        
+    <b>Recomendaciones Personalizadas</b>:<br>
+        Utilizando las capacidades del modelo Llama 3.2, nuestro chatbot genera recomendaciones de mitigación personalizadas para cada usuario. Estas sugerencias se adaptan al perfil técnico de cada persona, considerando su nivel de conocimiento, sus dudas técnicas y sus capacidades operativas.<br>
+        
+    <b>Optimización de Recursos</b>:<br>
+        Nuestra solución también proporciona estrategias para optimizar el uso de los recursos tecnológicos de las organizaciones, permitiéndoles mejorar su eficiencia operativa y reducir costos, sin comprometer su seguridad.</p>
+</section>
+
+<section id="background">
+    <h2>Antecedentes</h2>
+    <p>Existen aproximadamente 42,269 organizaciones de la sociedad civil (OSC) registradas en el Registro Federal de las OSC en México.<br>
+        • En promedio, los recursos autogenerados (como cuotas y ventas) representan aproximadamente el 85% de sus ingresos, mientras que el financiamiento público y las donaciones privadas contribuyen con el 15% restante.<br>
+        • Se estima que el valor total de los activos de las fundaciones en México es de alrededor de $5 mil millones de dólares. Esta cifra incluye tanto los recursos autogenerados como las donaciones y el financiamiento público.<br>
+        
+        Según datos del Sistema de Información sobre Organizaciones de la Sociedad Civil (SIOS) de la Secretaría de Desarrollo Social (SEDESOL), la distribución porcentual de las 42,269 OSC en México es la siguiente:<br>
+        
+        • Distrito Federal: 31%<br>
+        • Coahuila: 8%<br>
+        • Estado de México: 5%<br>
+        • Nuevo León: 4%<br>
+        • Jalisco: 3%<br>
+        • Otros estados: 49%.</p>
 </section>
 
 <section id="technical-details">
@@ -166,12 +191,18 @@
 
 <section id="results">
     <h2>Resultados y Evaluación</h2>
-    <p>Describe los resultados obtenidos, la efectividad de la solución y cualquier evaluación realizada.</p>
+    <p>Se realizaron pruebas con 12 promps.<br>
+        Se fijo un porcentaje mínimo de efectividad del 80%.<br>
+        6 sabiamos con vulnerabilidad y 6 sin vulnerabilidad.<br>
+        El resultado fue 10 solicitudes correctas de 12, es decir el 83.33%.<br>
+        Con lo cual se dió por satisfactorio el resultado.</p>
 </section>
 
 <section id="future-work">
     <h2>Trabajo Futuro</h2>
-    <p>Habla sobre posibles mejoras, funcionalidades futuras o cómo se podría expandir el proyecto.</p>
+    <p>•	Implementación de Mejoras: Realizar ajustes basados en el análisis de datos y el feedback de los usuarios.<br>
+        •	Capacitación Continua: Proveer capacitación regular al equipo de desarrollo y soporte para asegurar la evolución constante del chatbot.Habla sobre posibles mejoras, funcionalidades futuras o cómo se podría expandir el proyecto.<br>
+        •	Promoción: Realizar presentaciones con las cámaras del sector para promocionar esta herramienta.</p>
 </section>
 
 <section id="video">
@@ -180,7 +211,7 @@
 </section>
 
 <footer>
-    <p>© 2024 Hackathon. Todos los derechos reservados.</p>
+    <p>Hugo Flores/Jorge Fernández/Osvaldo Hernández/Lorenzo Sánchez.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
