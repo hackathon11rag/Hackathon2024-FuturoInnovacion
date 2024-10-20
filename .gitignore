@@ -1,0 +1,12 @@
+# Ignore virtual environment
+venv/
+code/venv/
+
+
+# Optional: If there are any specific Python-related files or directories you'd like to exclude, you can also add them:
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.env
+*.log
